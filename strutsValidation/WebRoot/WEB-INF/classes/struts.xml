@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="validation" namespace="/validation" extends="struts-default">
+        <action name="simpleAnnotationLogin" class="com.validation.action.SimpleAnnotationAction" method="login">
+            <result name="input">/SimpleAnnotation.jsp</result>
+            <result name="success" type="redirect">/LoginSuccess.jsp</result>
+        </action>
+        <action name="simpleAnnotationLogin2" class="com.validation.action.SimpleAnnotationAction" method="login2">
+            <result name="input">/SimpleAnnotation.jsp</result>
+            <result name="success" type="redirect">/LoginSuccess.jsp</result>
+        </action>
+        
+        <action name="simpleAnnotationLogin3" class="com.validation.action.SimpleAnnotationAction" method="login3">
+            <result name="input">/SimpleAnnotation.jsp</result>
+            <result name="success" type="redirect">/LoginSuccess.jsp</result>
+        </action>
+
+        <action name="simpleAnnotationLogin5" class="com.validation.action.SimpleAnnotationAction" method="login5">
+            <interceptor-ref name="validation">
+                <param name="validateAnnotatedMethodOnly">true</param>
+            </interceptor-ref>
+            <result name="input">/SimpleAnnotation.jsp</result>
+            <result name="success" type="redirect">/LoginSuccess.jsp</result>
+        </action>    
+    </package>
+	
+</struts>    
