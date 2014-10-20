@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="student">
+	<!-- 通过typeAlias使得我们在下面使用Student实体类的时候不需要写包名 -->
+	<typeAlias alias="Student" type="com.amt.test.Student" />
+	<resultMap class="com.amt.test.Student" id="Student">
+		<result property="studentId" column="student_id"/>
+		<result property="studentName" column="student_name"/>
+		<result property="classes" column="classes_id" select="classes.getClassesById"/><!-- 在启用namespace前，这里的select可以不要classes前缀 -->
+	</resultMap>
+	
+	<parameterMap id="paramMapEx" class="com.amt.test.Student">
+		<parameter property="studentName" jdbcType="varchar"/>
+		<parameter property="classes" jdbcType="int"/>
+	</parameterMap>
+	
+	<sql id="sql_where">
+		<dynamic prepend="where">
+			<isEqual prepend="" compareValue="0">
+				where student_id = #id#
+			</isEqual>
+		</dynamic>
+	</sql>
+	
+	<!-- 这样以后改了sql，就不需要去改java代码了 -->
+	<!-- id表示select里的sql语句，resultClass表示返回结果的类型 -->
+	<select id="selectAllStudent" resultMap="Student">
+		select * from student 
+	</select>
+
+	<!-- parameterClass表示参数的内容 -->
+	<!-- #表示这是一个外部调用的需要传进的参数，可以理解为占位符 -->
+	<select id="selectStudentById" parameterClass="int" resultMap="Student">
+		select * from student where student_id=#id#
+	</select>
+	
+	<!-- 注意这里的resultClass类型，使用Student类型取决于queryForList还是queryForObject -->
+	<select id="selectStudentByName" parameterClass="String" resultMap="Student">
+		select * from student where student_name like '%$name$%'
+	</select>
+	
+	<!-- 用bean方式注入参数 -->
+	<select id="getStudentByName" parameterMap="paramMapEx" resultMap="Student">
+		select * from student
+		where student_name like ?
+	</select>
+	
+	<!-- 动态sql -->
+	<select id="dynamicSql" resultMap="Student">
+		select * from student
+			
+		<!-- <isEqual prepend="" compareValue="0">
+			where student_id = #id#
+		</isEqual> -->
+		<include refid="sql_where"/>
+		order by student_id desc
+	</select>
+	
+	<!-- 更新记录 -->
+	<update id="updateStudent" parameterClass="int">
+		update student set classes_id = #classId# where student_id = 10
+	</update>
+	
+	<insert id="addStudent" parameterClass="Student">
+		insert into student(student_name,classes_id) values (#studentName#,#classes.classId#)
+	</insert>
+	
+</sqlMap>
