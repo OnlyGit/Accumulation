@@ -3,7 +3,7 @@ package com.poj;
 /**
  * 将偶数拆分为两个素数的和
  * @author QJF
- *
+ * 偶数：even numbers
  */
 public class GoldbachConjecture {
 
