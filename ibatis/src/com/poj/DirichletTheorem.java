@@ -5,6 +5,9 @@ package com.poj;
  * 得到的序列为a,a+b,a+2b,a+3b,a+4b....
  * 找出序列第n个素数
  * @author QJF
+ * 
+ * 素数：prime number
+ * 
  */
 public class DirichletTheorem {
 
