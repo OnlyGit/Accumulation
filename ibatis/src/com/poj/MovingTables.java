@@ -52,7 +52,6 @@ public class MovingTables {
 			}
 		}
 		
-		
 		System.out.println(getMax(opsitions));
 	}
 	
