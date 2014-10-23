@@ -1,4 +1,4 @@
-package com.jvm;
+package com.basic.jvm;
 
 interface Parent {
 	String parent = "parent";
