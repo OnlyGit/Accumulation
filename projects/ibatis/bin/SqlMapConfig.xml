@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<!-- 引用JDBC属性的配置文件 -->
+	<properties resource="SqlMap.properties" />
+	<!-- 启用namespace配置，如果不启用，将Student.xml和 Classes.xml看作同一个文件，如果要引用，可以直接引用-->
+	<settings useStatementNamespaces="true"/>
+	<!-- 使用JDBC的事务管理 -->
+	<transactionManager type="JDBC">
+		<!-- 数据源 -->
+		<dataSource type="SIMPLE">
+			<property name="JDBC.Driver" value="${driver}" />
+			<property name="JDBC.ConnectionURL" value="${url}" />
+			<property name="JDBC.Username" value="${username}" />
+			<property name="JDBC.Password" value="${password}" />
+		</dataSource>
+	</transactionManager>
+	<sqlMap resource="com/amt/test/Student.xml" />
+	<sqlMap resource="com/amt/test/Classes.xml" />
+</sqlMapConfig>
