@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.extend">
+	<class name="Animal" table="animal">
+		<id name="aminalId" column="aminal_id">
+			<generator class="native" />
+		</id>
+		
+		<property name="type" column="type"/>
+		<property name="name" column="name"/>
+		
+		<joined-subclass name="Dog" table="dog">
+			<key column="d_id"></key>
+			<property name="height" column="height" type="integer"></property>
+		</joined-subclass>
+		
+		<joined-subclass name="Pig" table="pig">
+			<key column="p_id"></key>
+			<property name="weight" column="weight" type="integer"></property>
+		</joined-subclass>
+	</class>
+</hibernate-mapping>
