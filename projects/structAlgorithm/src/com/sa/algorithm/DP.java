@@ -39,4 +39,18 @@ public class DP {
 		}
 		return count;
 	}
+	
+	//背包问题
+	private static int getResult(int i, int[] goods, int content) {
+		if(i < 0) {
+			return 0;
+		}
+		
+		int value = 0;
+		value = getResult(i - 1, goods, content);
+		
+		value = getResult(i - 1, goods, content - goods[i]) + goods[i];
+		
+		return 0;
+	}
 }
