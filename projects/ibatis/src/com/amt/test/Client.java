@@ -58,7 +58,7 @@ public class Client {
 		boolean flag = false;
 		Object object = false;
 		try {
-			object = sqlMapClient.update("student.updateStudent", student);
+			object = sqlMapClient.update("student.updateStudent", 1);
 			System.out.println("更新学生信息的返回值：" + object + "，返回影响的行数");
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -102,7 +102,7 @@ public class Client {
 	public Student getStudentByName(String name) {
 		Student student = null;
 		student = new Student();
-		student.setStudentId(10);
+//		student.setStudentId(10);
 		student.setStudentName(name);
 		try {
 			student = (Student)sqlMapClient.queryForObject("student.getStudentByName",student);
@@ -149,7 +149,7 @@ public class Client {
 	
 	public static void main(String[] args) {
 		Client client = new Client();
-		/*List<Student> students = client.selectAllStudent();
+		/**/List<Student> students = client.selectAllStudent();
 		for(Student student : students) {
 			System.out.println(student.getStudentName());
 		}
@@ -163,21 +163,27 @@ public class Client {
 			System.out.println(student.getClasses().getClassName());
 		}
 		System.out.println("------bean注入参数--------");
-		client.getStudentByName("%333%");
+		client.getStudentByName("%7%");
 		
 		System.out.println("------动态sql--------");
 		students = client.dgnamicStudent(1);
 		for(Student stu : students) {
 			System.out.println(stu.getStudentName());
-		}*/
-		
+		}
 //		testTransaction();
 		
-		Student student = new Student();
+		/*Student student = new Student();
 		student.setStudentName("cff");
 		Classes classes = new Classes();
-		classes.setClassId(4);
+		classes.setClassId(1);
 		student.setClasses(classes);
-		client.addStudent(student);
+		client.addStudent(student);*/
+		
+		/*Student student = new Student();
+		student.setStudentName("cff");
+		Classes classes = new Classes();
+		classes.setClassId(1);
+		student.setClasses(classes);
+		client.updateStudent(student);*/
 	}
 }

@@ -7,12 +7,11 @@
 	<resultMap class="com.amt.test.Student" id="Student">
 		<result property="studentId" column="student_id"/>
 		<result property="studentName" column="student_name"/>
-		<result property="classes" column="classes_id" select="classes.getClassesById"/><!-- 在启用namespace前，这里的select可以不要classes前缀 -->
+		<result property="classes" column="class_id" select="classes.getClassesById"/><!-- 在启用namespace前，这里的select可以不要classes前缀 -->
 	</resultMap>
 	
 	<parameterMap id="paramMapEx" class="com.amt.test.Student">
 		<parameter property="studentName" jdbcType="varchar"/>
-		<parameter property="classes" jdbcType="int"/>
 	</parameterMap>
 	
 	<sql id="sql_where">
@@ -59,11 +58,13 @@
 	
 	<!-- 更新记录 -->
 	<update id="updateStudent" parameterClass="int">
-		update student set classes_id = #classId# where student_id = 10
+		<!-- 只有一个参数，这里的引用可以随意命名，如#classId#可以替换为#aaa# -->
+		update student set class_id = #classId# where student_id = 21
 	</update>
 	
 	<insert id="addStudent" parameterClass="Student">
-		insert into student(student_name,classes_id) values (#studentName#,#classes.classId#)
+		<!-- 参数为Student类型， #studentName#,#classes.classId#命名要规范-->
+		insert into student(student_name,class_id) values (#studentName#,#classes.classId#)
 	</insert>
 	
 </sqlMap>
