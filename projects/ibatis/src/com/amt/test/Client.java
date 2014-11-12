@@ -102,11 +102,11 @@ public class Client {
 	public Student getStudentByName(String name) {
 		Student student = null;
 		student = new Student();
-//		student.setStudentId(10);
+		student.setStudentId(9);
 		student.setStudentName(name);
 		try {
 			student = (Student)sqlMapClient.queryForObject("student.getStudentByName",student);
-			System.out.println(student.getStudentId());
+			System.out.println(student.getClasses().getClassId());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -163,7 +163,7 @@ public class Client {
 			System.out.println(student.getClasses().getClassName());
 		}
 		System.out.println("------bean注入参数--------");
-		client.getStudentByName("%7%");
+		client.getStudentByName("%update%");
 		
 		System.out.println("------动态sql--------");
 		students = client.dgnamicStudent(1);

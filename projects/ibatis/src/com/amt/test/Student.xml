@@ -12,6 +12,7 @@
 	
 	<parameterMap id="paramMapEx" class="com.amt.test.Student">
 		<parameter property="studentName" jdbcType="varchar"/>
+		<parameter property="studentId" jdbcType="int"/>
 	</parameterMap>
 	
 	<sql id="sql_where">
@@ -43,6 +44,7 @@
 	<select id="getStudentByName" parameterMap="paramMapEx" resultMap="Student">
 		select * from student
 		where student_name like ?
+		and student_id = ?
 	</select>
 	
 	<!-- 动态sql -->
