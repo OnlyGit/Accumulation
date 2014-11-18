@@ -9,7 +9,7 @@ import org.apache.zookeeper.data.Stat;
 
 public class ConfigCenter implements Watcher {
 
-	ZooKeeper zk = null;  
+	ZooKeeper zk = null;
     String znode;  
   
     ConfigCenter(String address, String znode) {  

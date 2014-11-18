@@ -16,7 +16,6 @@ public class ConfigManagerDemo {
 	        cc.updateConfig("c");  
 	        cc.updateConfig("d");
 		} catch (Exception e) {
-			
 		}
 	}
 }
