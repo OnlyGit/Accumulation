@@ -4,11 +4,21 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Properties;
+import java.util.Set;
+import java.util.concurrent.CountDownLatch;
 
 public class PropertiesUtil {
 
 	private static Properties prop = new Properties();
+	
+	private static Map<String, String> map = new HashMap<String, String>();
+	
+	public static CountDownLatch end = new CountDownLatch(2);
 	
 	public static String getValue(String key) {
 		InputStream in = PropertiesUtil.class.getResourceAsStream("../conf/cfg.properties");
@@ -29,17 +39,25 @@ public class PropertiesUtil {
 		return result;
 	}
 	
-	public static void setValue(String key, String value) {
+	public static void saveValue() {
 		try {
 //			System.out.println(System.getProperty("user.dir"));
 			//此时的相对路径(以user.dir为基路径的路径)为"src/com/joe/config/manager/conf/cfg.properties"
 			OutputStream out = new FileOutputStream("src/com/joe/config/manager/conf/cfg.properties");
-			prop.setProperty(key, value);
+			Set<Entry<String, String>> set = map.entrySet();
+			for(Iterator<Entry<String, String>> it = set.iterator(); it.hasNext();) {
+				Entry<String, String> entry = it.next();
+				prop.setProperty(entry.getKey(), entry.getValue());
+			}
 			prop.store(out, "");
 			out.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static void updateValue(String key, String value) {
+		map.put(key, value);
 	}
 	
 	public static void main(String[] args) {

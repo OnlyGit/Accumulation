@@ -37,6 +37,13 @@ public class ConfigManager{
 	
 	public static void main(String[] args) {
 		ConfigManager cm = new ConfigManager("localhost:2181","/demo");
-		cm.updateConfig("configg".getBytes());
+		cm.updateConfig("configggg".getBytes());
+		try {
+			PropertiesUtil.end.await();
+//			
+			PropertiesUtil.saveValue();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
