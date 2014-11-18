@@ -11,7 +11,7 @@ import org.apache.zookeeper.ZooKeeper;
 
 /**
  * 对zookeeper接口的封装
- * @Author QJF
+ * @Author QJF0----
  * @Desception 
  * @Date 2014年11月18日下午5:17:19
  */
