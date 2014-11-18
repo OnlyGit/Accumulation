@@ -15,7 +15,6 @@ public class SimpleDemo {
 				public void process(WatchedEvent event) {
 					System.out.println("event-------");
 				}
-				
 			});
 			zk.create("/root", "myData".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
 			zk.create("/root/childone","childone".getBytes(), Ids.OPEN_ACL_UNSAFE,CreateMode.PERSISTENT);
