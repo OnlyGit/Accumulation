@@ -32,10 +32,10 @@ public class ZKWatcher implements Watcher, Runnable {
 	public void run() {
 		try {  
             synchronized (this) {  
-                           while (true) {  
-                              wait();  
-                            }  
-                        }  
+               while (true) {  
+                  wait();  
+                }  
+            }  
         } catch (InterruptedException e) {  
             e.printStackTrace();  
         }  
