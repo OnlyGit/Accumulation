@@ -10,15 +10,12 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Properties;
 import java.util.Set;
-import java.util.concurrent.CountDownLatch;
 
 public class PropertiesUtil {
 
 	private static Properties prop = new Properties();
 	
 	private static Map<String, String> map = new HashMap<String, String>();
-	
-	public static CountDownLatch end = new CountDownLatch(2);
 	
 	public static String getValue(String key) {
 		InputStream in = PropertiesUtil.class.getResourceAsStream("../conf/cfg.properties");
@@ -43,6 +40,7 @@ public class PropertiesUtil {
 		try {
 //			System.out.println(System.getProperty("user.dir"));
 			//此时的相对路径(以user.dir为基路径的路径)为"src/com/joe/config/manager/conf/cfg.properties"
+			System.out.println("savevalue----------------");
 			OutputStream out = new FileOutputStream("src/com/joe/config/manager/conf/cfg.properties");
 			Set<Entry<String, String>> set = map.entrySet();
 			for(Iterator<Entry<String, String>> it = set.iterator(); it.hasNext();) {

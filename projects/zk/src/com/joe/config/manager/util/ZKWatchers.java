@@ -1,7 +1,5 @@
 package com.joe.config.manager.util;
 
-import java.util.Arrays;
-
 import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
@@ -24,9 +22,9 @@ public class ZKWatchers implements Watcher, Runnable{
 			this.zooKeeper = new ZooKeeper(address, 5000, this);
 			this.node = node;
 			this.proKey = proKey;
-//			if(this.zooKeeper.exists(node, false) == null) {
-//				this.zooKeeper.create(node, "aa".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
-//			}
+			if(this.zooKeeper.exists(node, false) == null) {
+				this.zooKeeper.create(node, "aa".getBytes(), Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);
+			}
 		} catch (Exception e) {
 		}
 	}
@@ -48,16 +46,13 @@ public class ZKWatchers implements Watcher, Runnable{
 	public void process(WatchedEvent event) {
 		try {
 			this.zooKeeper.exists(node, true);
-//			System.out.println(event.getType());
 			if(event.getType() == EventType.NodeDataChanged) {
-				String data = Arrays.toString(this.zooKeeper.getData(node, false, null));
-				PropertiesUtil.updateValue(proKey, data);
-				System.out.println(proKey);
+				String data = new String(this.zooKeeper.getData(node, false, null));
+				String path = PropertiesUtil.getValue(proKey);
+				FileUtils.writeContent(path, data);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			PropertiesUtil.end.countDown();
 		}
 	}
 
