@@ -45,11 +45,14 @@ public class DistributedClient {
 		
 		latch.await();
 		
+		List<String> children = this.zk.getChildren("/" + groupNode, false);
+		System.out.println(this.thisPath+"-begin-"+children.size());
 		thisPath = zk.create("/" + groupNode + "/" + subNode, null, Ids.OPEN_ACL_UNSAFE,CreateMode.EPHEMERAL_SEQUENTIAL);
 		
-		Thread.sleep(10);
+//		Thread.sleep(10);
 		
-		List<String> children = this.zk.getChildren("/" + groupNode, false);
+		children = this.zk.getChildren("/" + groupNode, false);
+		System.out.println(this.thisPath+"-end-"+children.size());
 		
 		if(children.size() == 1) {
 			doSomething();
@@ -57,6 +60,7 @@ public class DistributedClient {
 			String thisNode = thisPath.substring(("/" + groupNode + "/").length());
 			Collections.sort(children);
 			int index = children.indexOf(thisNode);
+//			System.out.println(this.thisPath+"--"+index);
 			if(index == -1) {
 			} else if(index == 0) {
 				doSomething();
