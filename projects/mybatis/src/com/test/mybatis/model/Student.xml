@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- <mapper namespace="com.test.mybatis.model.Student"> -->
+<mapper namespace="com.test.mybatis.inter.IStudentInterface"> 
+ <!--用接口方式调用时，这里的namespace必须为接口路径，否则报错 is not known to the MapperRegistry-->
+	<resultMap type="Student" id="student">
+		<result property="studentId" column="student_id"/>
+		<result property="studentNo" column="student_no"/>
+		<result property="studentName" column="student_name"/>
+	</resultMap>
+    <select id="selectStudentByID" parameterType="int" resultMap="student">
+        select * from student where student_id = #{id}
+    </select>
+</mapper>
