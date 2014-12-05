@@ -1,0 +1,3 @@
+1390 DEBUG [2014-12-05 14:51:22]  {"access_token":"2.00yfXRjC24okeCa30f37c1cfbXnRPC","remind_in":"157679999","expires_in":157679999,"uid":"2501381814"}
+
+AccessToken [accessToken=2.00yfXRjC24okeCa30f37c1cfbXnRPC, expireIn=157679999, refreshToken=,uid=2501381814]

@@ -1,0 +1,141 @@
+0    INFO  [2014-12-05 14:51:20]  code: 44a67c935b40fcdf218cc29a1ac078f7
+26   DEBUG [2014-12-05 14:51:20]  Request:
+26   DEBUG [2014-12-05 14:51:20]  POSThttps://api.weibo.com/oauth2/access_token
+1374 DEBUG [2014-12-05 14:51:22]  Response:
+1375 DEBUG [2014-12-05 14:51:22]  https StatusCode:200
+1375 DEBUG [2014-12-05 14:51:22]  Server:nginx/1.6.1
+1375 DEBUG [2014-12-05 14:51:22]  Date:Fri, 05 Dec 2014 06:50:50 GMT
+1376 DEBUG [2014-12-05 14:51:22]  Content-Type:text/plain;charset=UTF-8
+1376 DEBUG [2014-12-05 14:51:22]  Content-Length:117
+1376 DEBUG [2014-12-05 14:51:22]  Connection:keep-alive
+1376 DEBUG [2014-12-05 14:51:22]  Pragma:No-cache
+1376 DEBUG [2014-12-05 14:51:22]  Cache-Control:no-cache
+1381 DEBUG [2014-12-05 14:51:22]  Expires:Thu, 01 Jan 1970 00:00:00 GMT
+1382 DEBUG [2014-12-05 14:51:22]  Api-Server-IP:10.75.25.86
+1390 DEBUG [2014-12-05 14:51:22]  {"access_token":"2.00yfXRjC24okeCa30f37c1cfbXnRPC","remind_in":"157679999","expires_in":157679999,"uid":"2501381814"}
+
+0    DEBUG [2014-12-05 14:54:01]  Request:
+0    DEBUG [2014-12-05 14:54:01]  GET:https://api.weibo.com/2/users/show.json
+30   DEBUG [2014-12-05 14:54:01]  Authorization: OAuth2 2.00yfXRjC24okeCa30f37c1cfbXnRPC
+30   DEBUG [2014-12-05 14:54:01]  API-RemoteIP: 192.168.4.159
+549  DEBUG [2014-12-05 14:54:01]  Response:
+550  DEBUG [2014-12-05 14:54:01]  https StatusCode:200
+550  DEBUG [2014-12-05 14:54:01]  Server:nginx/1.2.0
+550  DEBUG [2014-12-05 14:54:01]  Date:Fri, 05 Dec 2014 06:53:29 GMT
+550  DEBUG [2014-12-05 14:54:01]  Content-Type:application/json;charset=UTF-8
+551  DEBUG [2014-12-05 14:54:01]  Transfer-Encoding:chunked
+551  DEBUG [2014-12-05 14:54:01]  Connection:keep-alive
+551  DEBUG [2014-12-05 14:54:01]  Api-Server-IP:10.75.5.64
+551  DEBUG [2014-12-05 14:54:01]  Vary:Accept-Encoding
+561  WARN  [2014-12-05 14:54:01]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+562  DEBUG [2014-12-05 14:54:01]  {"id":2501381814,"idstr":"2501381814","class":1,"screen_name":"x小强盗","name":"x小强盗","province":"51","city":"1","location":"四川 成都","description":"","url":"","profile_image_url":"http://tp3.sinaimg.cn/2501381814/50/0/1","profile_url":"u/2501381814","domain":"","weihao":"","gender":"m","followers_count":25,"friends_count":185,"pagefriends_count":0,"statuses_count":57,"favourites_count":0,"created_at":"Sat Oct 29 14:39:55 +0800 2011","following":false,"allow_all_act_msg":false,"geo_enabled":true,"verified":false,"verified_type":-1,"remark":"","status":{"created_at":"Thu Sep 05 15:44:10 +0800 2013","id":3619196082638857,"mid":"3619196082638857","idstr":"3619196082638857","text":"转发下。。。。。。。","source_type":1,"source":"<a href=\"http://app.weibo.com/t/feed/1sxHP2\" rel=\"nofollow\">专业版微博</a>","favorited":false,"truncated":false,"in_reply_to_status_id":"","in_reply_to_user_id":"","in_reply_to_screen_name":"","pic_urls":[],"geo":null,"reposts_count":0,"comments_count":0,"attitudes_count":0,"mlevel":0,"visible":{"type":0,"list_id":0},"darwin_tags":[]},"ptype":0,"allow_all_comment":true,"avatar_large":"http://tp3.sinaimg.cn/2501381814/180/0/1","avatar_hd":"http://tp3.sinaimg.cn/2501381814/180/0/1","verified_reason":"","verified_trade":"","verified_reason_url":"","verified_source":"","verified_source_url":"","follow_me":false,"online_status":0,"bi_followers_count":1,"lang":"zh-cn","star":0,"mbtype":0,"mbrank":0,"block_word":0,"block_app":0,"credit_score":80,"urank":7}
+
+573  INFO  [2014-12-05 14:54:01]  User [id=2501381814, screenName=x小强盗, name=x小强盗, province=51, city=1, location=四川 成都, description=, url=, profileImageUrl=http://tp3.sinaimg.cn/2501381814/50/0/1, userDomain=, gender=m, followersCount=25, friendsCount=185, statusesCount=57, favouritesCount=0, createdAt=Sat Oct 29 14:39:55 CST 2011, following=false, verified=false, verifiedType=-1, allowAllActMsg=false, allowAllComment=true, followMe=false, avatarLarge=http://tp3.sinaimg.cn/2501381814/180/0/1, onlineStatus=0, status=Status [user=null, idstr=3619196082638857, createdAt=Thu Sep 05 15:44:10 CST 2013, id=3619196082638857, text=转发下。。。。。。。, source=Source [url=http://app.weibo.com/t/feed/1sxHP2, relationShip=nofollow, name=专业版微博], favorited=false, truncated=false, inReplyToStatusId=-1, inReplyToUserId=-1, inReplyToScreenName=, thumbnailPic=, bmiddlePic=, originalPic=, retweetedStatus=null, geo=null, latitude=-1.0, longitude=-1.0, repostsCount=0, commentsCount=0, mid=3619196082638857, annotations=, mlevel=0, visible=Visible [type=0, list_id=0]], biFollowersCount=1, remark=null, lang=zh-cn, verifiedReason=, weihao=, statusId=]
+0    WARN  [2014-12-05 17:13:35]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 17:19:09]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 17:20:38]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 17:21:10]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 17:28:12]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 17:31:57]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 17:32:22]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+1    WARN  [2014-12-05 17:34:13]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 17:38:12]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:04:04]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    DEBUG [2014-12-05 18:06:46]  Request:
+0    DEBUG [2014-12-05 18:06:46]  POSThttps://api.weibo.com/2/comments/create.json
+29   DEBUG [2014-12-05 18:06:47]  Authorization: OAuth2 2.00yfXRjC24okeCa30f37c1cfbXnRPC
+29   DEBUG [2014-12-05 18:06:47]  API-RemoteIP: 192.168.4.159
+259  DEBUG [2014-12-05 18:06:47]  Response:
+259  DEBUG [2014-12-05 18:06:47]  https StatusCode:400
+259  DEBUG [2014-12-05 18:06:47]  Server:nginx/1.6.1
+259  DEBUG [2014-12-05 18:06:47]  Date:Fri, 05 Dec 2014 10:06:15 GMT
+259  DEBUG [2014-12-05 18:06:47]  Content-Type:application/json;charset=UTF-8
+259  DEBUG [2014-12-05 18:06:47]  Transfer-Encoding:chunked
+259  DEBUG [2014-12-05 18:06:47]  Connection:keep-alive
+259  DEBUG [2014-12-05 18:06:47]  Api-Server-IP:10.75.5.104
+259  DEBUG [2014-12-05 18:06:47]  Vary:Accept-Encoding
+260  WARN  [2014-12-05 18:06:47]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+261  DEBUG [2014-12-05 18:06:47]  {"error":"miss required parameter (id), see doc for more info.","error_code":10016,"request":"/2/comments/create.json"}
+
+0    DEBUG [2014-12-05 18:07:15]  Request:
+1    DEBUG [2014-12-05 18:07:15]  POSThttps://api.weibo.com/2/messages/sendall.json
+28   DEBUG [2014-12-05 18:07:15]  Authorization: OAuth2 2.00yfXRjC24okeCa30f37c1cfbXnRPC
+28   DEBUG [2014-12-05 18:07:15]  API-RemoteIP: 192.168.4.159
+478  DEBUG [2014-12-05 18:07:15]  Response:
+478  DEBUG [2014-12-05 18:07:15]  https StatusCode:404
+478  DEBUG [2014-12-05 18:07:15]  Server:nginx/1.2.0
+478  DEBUG [2014-12-05 18:07:15]  Date:Fri, 05 Dec 2014 10:06:44 GMT
+478  DEBUG [2014-12-05 18:07:15]  Content-Type:application/json;charset=UTF-8
+478  DEBUG [2014-12-05 18:07:15]  Transfer-Encoding:chunked
+478  DEBUG [2014-12-05 18:07:15]  Connection:keep-alive
+478  DEBUG [2014-12-05 18:07:15]  Api-Server-IP:10.75.5.94
+479  DEBUG [2014-12-05 18:07:15]  Vary:Accept-Encoding
+481  WARN  [2014-12-05 18:07:15]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+481  DEBUG [2014-12-05 18:07:15]  {"error":"Request Api not found!","error_code":10020,"request":"/2/messages/sendall.json"}
+
+0    DEBUG [2014-12-05 18:08:01]  Request:
+0    DEBUG [2014-12-05 18:08:01]  POSThttps://api.weibo.com/2/messages/sendall.json?access_token=2.00yfXRjC24okeCa30f37c1cfbXnRPC
+28   DEBUG [2014-12-05 18:08:01]  Authorization: OAuth2 2.00yfXRjC24okeCa30f37c1cfbXnRPC
+29   DEBUG [2014-12-05 18:08:01]  API-RemoteIP: 192.168.4.159
+262  DEBUG [2014-12-05 18:08:01]  Response:
+262  DEBUG [2014-12-05 18:08:01]  https StatusCode:404
+262  DEBUG [2014-12-05 18:08:01]  Server:nginx/1.2.0
+262  DEBUG [2014-12-05 18:08:01]  Date:Fri, 05 Dec 2014 10:07:30 GMT
+263  DEBUG [2014-12-05 18:08:01]  Content-Type:application/json;charset=UTF-8
+263  DEBUG [2014-12-05 18:08:01]  Transfer-Encoding:chunked
+263  DEBUG [2014-12-05 18:08:01]  Connection:keep-alive
+263  DEBUG [2014-12-05 18:08:01]  Api-Server-IP:10.75.24.202
+263  DEBUG [2014-12-05 18:08:01]  Vary:Accept-Encoding
+264  WARN  [2014-12-05 18:08:01]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+264  DEBUG [2014-12-05 18:08:01]  {"error":"Request Api not found!","error_code":10020,"request":"/2/messages/sendall.json"}
+
+0    DEBUG [2014-12-05 18:08:27]  Request:
+0    DEBUG [2014-12-05 18:08:27]  POSThttps://api.weibo.com/2/messages/sendall.json
+27   DEBUG [2014-12-05 18:08:27]  Authorization: OAuth2 2.00yfXRjC24okeCa30f37c1cfbXnRPC
+28   DEBUG [2014-12-05 18:08:27]  API-RemoteIP: 192.168.4.159
+481  DEBUG [2014-12-05 18:08:27]  Response:
+481  DEBUG [2014-12-05 18:08:27]  https StatusCode:404
+482  DEBUG [2014-12-05 18:08:27]  Server:nginx/1.2.0
+482  DEBUG [2014-12-05 18:08:27]  Date:Fri, 05 Dec 2014 10:07:56 GMT
+482  DEBUG [2014-12-05 18:08:27]  Content-Type:application/json;charset=UTF-8
+482  DEBUG [2014-12-05 18:08:27]  Transfer-Encoding:chunked
+482  DEBUG [2014-12-05 18:08:27]  Connection:keep-alive
+482  DEBUG [2014-12-05 18:08:27]  Api-Server-IP:10.75.24.205
+482  DEBUG [2014-12-05 18:08:27]  Vary:Accept-Encoding
+485  WARN  [2014-12-05 18:08:27]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+485  DEBUG [2014-12-05 18:08:27]  {"error":"Request Api not found!","error_code":10020,"request":"/2/messages/sendall.json"}
+
+0    DEBUG [2014-12-05 18:09:44]  Request:
+0    DEBUG [2014-12-05 18:09:44]  POSThttps://m.api.weibo.com/2/messages/sendall.json?access_token=2.00yfXRjC24okeCa30f37c1cfbXnRPC
+27   DEBUG [2014-12-05 18:09:44]  Authorization: OAuth2 2.00yfXRjC24okeCa30f37c1cfbXnRPC
+27   DEBUG [2014-12-05 18:09:44]  API-RemoteIP: 192.168.4.159
+281  DEBUG [2014-12-05 18:09:45]  Response:
+281  DEBUG [2014-12-05 18:09:45]  https StatusCode:400
+282  DEBUG [2014-12-05 18:09:45]  Server:nginx/1.2.0
+282  DEBUG [2014-12-05 18:09:45]  Date:Fri, 05 Dec 2014 10:09:13 GMT
+282  DEBUG [2014-12-05 18:09:45]  Content-Type:application/json; charset=utf-8
+282  DEBUG [2014-12-05 18:09:45]  Transfer-Encoding:chunked
+282  DEBUG [2014-12-05 18:09:45]  Connection:keep-alive
+284  WARN  [2014-12-05 18:09:45]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+285  DEBUG [2014-12-05 18:09:45]  {"error":"Param error, see doc for more info","error_code":10008,"request":"/2/messages/sendall.json"}
+
+
+0    WARN  [2014-12-05 18:12:52]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:13:28]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:13:43]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:14:26]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:18:49]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:19:10]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:25:18]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:28:40]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:29:09]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:30:10]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:30:25]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 18:34:13]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 19:09:30]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 19:12:07]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 19:12:35]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 19:15:02]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 19:17:36]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 19:17:58]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
+0    WARN  [2014-12-05 19:23:53]  Going to buffer response body of large or unknown size. Using getResponseBodyAsStream instead is recommended.
