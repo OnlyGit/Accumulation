@@ -9,29 +9,41 @@ import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import com.wechat.servlet.XmlUtil;
+
 public class WechatHttpClient {
 
 	DefaultHttpClient httpClient = new DefaultHttpClient();
 
 	public static void main(String[] args) {
 		WechatHttpClient w = new WechatHttpClient();
-		w.get("http://box.zhangmen.baidu.com/x", new Param[] {
+		StringBuffer result = w.get("http://box.zhangmen.baidu.com/x", new Param[] {
 				new Param("op", "12"), new Param("count", "1"),
 				new Param("title", "怒放的生命$$汪峰$$$$") });
+		
+		try {
+			result.substring("<?xml version=\"1.0\" encoding=\"gb2312\" ?>".length());
+			XmlUtil.getMusicResult(result.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public String httpRequest(String url, HttpRequestBase method) {
+	public StringBuffer httpRequest(String url, HttpRequestBase method) {
+		StringBuffer resData = null;
 		try {
 			HttpResponse result = httpClient.execute(method);
-			String resData = EntityUtils.toString(result.getEntity());
+			long start = System.currentTimeMillis();
+			resData = new StringBuffer(EntityUtils.toString(result.getEntity()));
+			System.out.println("获取字符串："+(System.currentTimeMillis() - start));
 			System.out.println(resData);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "";
+		return resData;
 	}
 
-	private String get(String url, Param[] params) {
+	private StringBuffer get(String url, Param[] params) {
 		if (null != params && params.length > 0) {
 			String encodedParams = this.encodeParameters(params);
 			if (-1 == url.indexOf("?")) {
@@ -44,7 +56,7 @@ public class WechatHttpClient {
 		return this.httpRequest(url, method);
 	}
 
-	private String post(String url, Param[] params) {
+	private StringBuffer post(String url, Param[] params) {
 		HttpPost method = new HttpPost(url);
 		return this.httpRequest(url, method);
 	}
@@ -65,5 +77,9 @@ public class WechatHttpClient {
 			}
 		}
 		return buf.toString();
+	}
+	
+	private String getResult(StringBuffer buff) {
+		return "";
 	}
 }

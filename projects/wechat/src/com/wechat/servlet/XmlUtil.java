@@ -117,6 +117,28 @@ public class XmlUtil {
 		return item;
 	}
 	
+	
+	/**
+	 * 解析百度音乐播放地址
+	 * @param buff
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getMusicResult(String buff) throws Exception {
+		long start = System.currentTimeMillis();
+		Document doc = DocumentHelper.parseText(buff);
+		Element root = doc.getRootElement();
+		
+		Element urlEle = root.element("url");
+		StringBuffer encode = new StringBuffer(urlEle.element("encode").getTextTrim());
+		StringBuffer decode = new StringBuffer(urlEle.element("decode").getTextTrim());
+		
+		System.out.println(encode.substring(0, encode.lastIndexOf("/") + 1));
+		System.out.println(decode.substring(0, decode.lastIndexOf("&")));
+		System.out.println(System.currentTimeMillis() - start);
+		return "";
+	}
+	
 	public static void main(String[] args) {
 		try {
 			MusicMsg msg = new MusicMsg();
