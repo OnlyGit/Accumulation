@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.j2eedt.core.MYECLIPSE_JAVAEE_5_CONTAINER"/>
+	<classpathentry kind="lib" path="G:/mvnRepo/dom4j/dom4j/1.6.1/dom4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="G:/mvnRepo/commons-codec/commons-codec/1.6/commons-codec-1.6.jar"/>
+	<classpathentry kind="lib" path="G:/mvnRepo/org/apache/httpcomponents/httpclient/4.2.1/httpclient-4.2.1.jar"/>
+	<classpathentry kind="lib" path="G:/mvnRepo/org/apache/httpcomponents/httpcore/4.2.1/httpcore-4.2.1.jar"/>
+	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
+</classpath>

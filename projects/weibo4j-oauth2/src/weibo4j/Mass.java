@@ -1,6 +1,7 @@
 package weibo4j;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -8,6 +9,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.HttpException;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
 import org.apache.commons.httpclient.methods.RequestEntity;
 import org.apache.commons.httpclient.methods.StringRequestEntity;
@@ -32,15 +35,30 @@ public class Mass extends Weibo {
 	}
 
 	public static void main(String[] args) {
-		String s = "{\"touser\": [\"uid1\"],\"text\": {\"content\": \"CONTENT\"},\"msgtype\": \"text\"}";
+		/*String s = "{\"touser\": [\"uid1\"],\"text\": {\"content\": \"CONTENT\"},\"msgtype\": \"text\"}";
+		s = "{\"loginname\": \"admin\",\"pwd\": \"admin\"}";
 		StringBuilder sb = new StringBuilder(s);
 		String param = sb.toString().replace("\"", "%22")  
 		        .replace("{", "%7b").replace("}", "%7d");
 		String url = "https://m.api.weibo.com/2/messages/sendall.json?access_token=2.00yfXRjC24okeCa30f37c1cfbXnRPC";
+		url = "http://localhost:8080/user/login/login";
 		try {
 			JSONObject obj = new JSONObject(s);
 			System.out.println(urlPostMethod(url,obj.toString()));
 		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
+		HttpClient httpClient = new HttpClient();
+		GetMethod method = new GetMethod("http://www.ithome.com/");
+		try {
+			long start = System.currentTimeMillis();
+			httpClient.executeMethod(method);
+			String responses = method.getResponseBodyAsString();
+//			System.out.println(responses);
+			System.out.println(System.currentTimeMillis() - start);
+		} catch (HttpException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
