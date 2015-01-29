@@ -11,9 +11,6 @@ import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 /**
  * 密文工具类
  * @author CL-XIE
@@ -23,7 +20,7 @@ public class CryptographUtil {
 	private String encodingAESKey = ConfigurationUtil.getConfig("encodingAESKey");//消息加密密钥
 	
 	/*-----------Base64 加密解密------------*/
-	public static String getBase64(String str) {
+	/*public static String getBase64(String str) {
 		byte[] b = null;
 		String result = "";
 		try {
@@ -37,9 +34,9 @@ public class CryptographUtil {
 			result = new BASE64Encoder().encode(b);
 		}
 		return result;
-	}
+	}*/
 	
-	public static String getFromBase64(String str) {
+	/*public static String getFromBase64(String str) {
 		byte[] b = null;
 		String result = "";
 		if(str != null) {
@@ -52,7 +49,7 @@ public class CryptographUtil {
 			}
 		}
 		return result;
-	}
+	}*/
 	
 	/*-----------AES 加密解密------------*/
 	public static byte[] encrypt(String content,String password) {
