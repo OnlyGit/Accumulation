@@ -1,4 +1,4 @@
-package lucene.joe.primary;
+package lucene.joe.test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -9,6 +9,7 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
+
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -17,11 +18,14 @@ import org.apache.lucene.document.Field.Store;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
 import org.apache.lucene.index.LiveIndexWriterConfig;
 import org.apache.lucene.index.Term;
+import org.apache.lucene.search.IndexSearcher;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
@@ -34,7 +38,7 @@ public class TestIndex {
 		String indexPath = "index";
 		String docsPath = "search";
 		boolean create = true;
-		/*for (int i = 0; i < args.length; i++) {
+		for (int i = 0; i < args.length; i++) {
 			if ("-index".equals(args[i])) {
 				indexPath = args[(i + 1)];
 				i++;
@@ -45,11 +49,6 @@ public class TestIndex {
 				create = false;
 			}
 		}
-
-		if (docsPath == null) {
-			System.err.println("Usage: " + usage);
-			System.exit(1);
-		}*/
 
 		File docDir = new File(docsPath);
 		if ((!docDir.exists()) || (!docDir.canRead())) {
@@ -67,11 +66,11 @@ public class TestIndex {
 			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
 
-//			if (create) {
-//				iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
-//			} else {
-//				iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
-//			}
+			if (create) {
+				iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
+			} else {
+				iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
+			}
 
 			IndexWriter writer = new IndexWriter(dir, iwc);
 			indexDocs(writer, docDir);
@@ -79,10 +78,18 @@ public class TestIndex {
 			writer.close();
 
 			Date end = new Date();
-			System.out.println(end.getTime() - start.getTime()+ " total milliseconds");
+			System.out.println(end.getTime() - start.getTime()
+					+ " total milliseconds");
 		} catch (IOException e) {
 			System.out.println(" caught a " + e.getClass()+ "\n with message: " + e.getMessage());
 		}
+		
+		
+		/*try {
+			getAllIndexes("index");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}*/
 	}
 
 	static void indexDocs(IndexWriter writer, File file) throws IOException {
@@ -122,5 +129,16 @@ public class TestIndex {
 					fis.close();
 				}
 			}
+	}
+	
+	//view all index files
+	private static void getAllIndexes(String index) throws Exception {
+		IndexReader reader = DirectoryReader.open(FSDirectory.open(new File(index)));
+		IndexSearcher searcher = new IndexSearcher(reader);
+		Document doc = null;
+		for(int i = 0; i < reader.maxDoc(); i++) {
+			doc = searcher.doc(i);
+			System.out.println(doc.get("path"));
+		}
 	}
 }

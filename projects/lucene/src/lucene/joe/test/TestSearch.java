@@ -1,4 +1,4 @@
-package lucene.joe.primary;
+package lucene.joe.test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -22,15 +22,13 @@ import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
 
 public class TestSearch {
-
 	public static void main(String[] args) throws Exception {
 		String usage = "Usage:\tjava org.apache.lucene.demo.SearchFiles [-index dir] [-field f] [-repeat n] [-queries file] [-query string] [-raw] [-paging hitsPerPage]\n\nSee http://lucene.apache.org/core/4_1_0/demo/ for details.";
 
-		if ((args.length > 0)
-				&& (("-h".equals(args[0])) || ("-help".equals(args[0])))) {
+		/*if ((args.length > 0) && (("-h".equals(args[0])) || ("-help".equals(args[0])))) {
 			System.out.println(usage);
 			System.exit(0);
-		}
+		}*/
 
 		String index = "index";
 		String field = "contents";
@@ -38,7 +36,7 @@ public class TestSearch {
 		int repeat = 0;
 		boolean raw = false;
 		String queryString = null;
-		int hitsPerPage = 4;
+		int hitsPerPage = 10;
 
 		/*for (int i = 0; i < args.length; i++) {
 			if ("-index".equals(args[i])) {
@@ -104,10 +102,12 @@ public class TestSearch {
 					searcher.search(query, null, 100);
 				}
 				Date end = new Date();
-				System.out.println("Time: " + (end.getTime() - start.getTime())+ "ms");
+				System.out.println("Time: " + (end.getTime() - start.getTime())
+						+ "ms");
 			}
 
-			doPagingSearch(in, searcher, query, hitsPerPage, raw,(queries == null) && (queryString == null));
+			doPagingSearch(in, searcher, query, hitsPerPage, raw,
+					(queries == null) && (queryString == null));
 
 			if (queryString != null) {
 				break;
@@ -144,7 +144,8 @@ public class TestSearch {
 
 			for (int i = start; i < end; i++) {
 				if (raw) {
-					System.out.println("doc=" + hits[i].doc + " score="+ hits[i].score);
+					System.out.println("doc=" + hits[i].doc + " score="
+							+ hits[i].score);
 				} else {
 					Document doc = searcher.doc(hits[i].doc);
 					String path = doc.get("path");
@@ -154,7 +155,8 @@ public class TestSearch {
 						if (title != null)
 							System.out.println("   Title: " + doc.get("title"));
 					} else {
-						System.out.println(i + 1 + ". "+ "No path for this document");
+						System.out.println(i + 1 + ". "
+								+ "No path for this document");
 					}
 				}
 			}
@@ -172,7 +174,8 @@ public class TestSearch {
 					if (start + hitsPerPage < numTotalHits) {
 						System.out.print("(n)ext page, ");
 					}
-					System.out.println("(q)uit or enter number to jump to a page.");
+					System.out
+							.println("(q)uit or enter number to jump to a page.");
 
 					String line = in.readLine();
 					if ((line.length() == 0) || (line.charAt(0) == 'q')) {
