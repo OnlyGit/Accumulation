@@ -36,6 +36,21 @@ public class WechatServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		this.doService2(req, resp);
+		
+		
+		
+		
+		/*InputStream is = req.getInputStream();
+		
+		StringBuilder sb = new StringBuilder();
+		int b = 0;
+		byte[] buff = new byte[128];
+		while((b = is.read(buff)) != -1) {
+			sb.append(new String(buff,0,b));
+		}
+		
+		System.out.println(sb.toString());
+		System.out.println(req.getParameter("width"));*/
 	}
 
 	/**

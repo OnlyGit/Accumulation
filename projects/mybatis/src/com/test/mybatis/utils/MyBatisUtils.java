@@ -14,6 +14,7 @@ public class MyBatisUtils {
 		Reader reader = null;
 		try {
 			reader = Resources.getResourceAsReader(resource);
+//			factory = new SqlSessionFactoryBuilder().build(reader,"developer");
 			factory = new SqlSessionFactoryBuilder().build(reader);
 		} catch(Exception e) {
 			e.printStackTrace();
