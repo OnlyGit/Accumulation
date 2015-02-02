@@ -102,13 +102,9 @@ public class TestSearch {
 					searcher.search(query, null, 100);
 				}
 				Date end = new Date();
-				System.out.println("Time: " + (end.getTime() - start.getTime())
-						+ "ms");
+				System.out.println("Time: " + (end.getTime() - start.getTime())+ "ms");
 			}
-
-			doPagingSearch(in, searcher, query, hitsPerPage, raw,
-					(queries == null) && (queryString == null));
-
+			doPagingSearch(in, searcher, query, hitsPerPage, raw,(queries == null) && (queryString == null));
 			if (queryString != null) {
 				break;
 			}
@@ -144,8 +140,7 @@ public class TestSearch {
 
 			for (int i = start; i < end; i++) {
 				if (raw) {
-					System.out.println("doc=" + hits[i].doc + " score="
-							+ hits[i].score);
+					System.out.println("doc=" + hits[i].doc + " score="+ hits[i].score);
 				} else {
 					Document doc = searcher.doc(hits[i].doc);
 					String path = doc.get("path");
@@ -155,8 +150,7 @@ public class TestSearch {
 						if (title != null)
 							System.out.println("   Title: " + doc.get("title"));
 					} else {
-						System.out.println(i + 1 + ". "
-								+ "No path for this document");
+						System.out.println(i + 1 + ". "+ "No path for this document");
 					}
 				}
 			}
@@ -174,8 +168,7 @@ public class TestSearch {
 					if (start + hitsPerPage < numTotalHits) {
 						System.out.print("(n)ext page, ");
 					}
-					System.out
-							.println("(q)uit or enter number to jump to a page.");
+					System.out.println("(q)uit or enter number to jump to a page.");
 
 					String line = in.readLine();
 					if ((line.length() == 0) || (line.charAt(0) == 'q')) {
