@@ -15,6 +15,7 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
+import org.apache.lucene.document.Field.Index;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
@@ -51,7 +52,7 @@ public class JoeIndex {
 					doc.add(pathField);
 
 					doc.add(new LongField("modified", file.lastModified(),Field.Store.NO));
-
+					
 					doc.add(new TextField("contents", new BufferedReader(new InputStreamReader(fis, StandardCharsets.UTF_8))));
 
 					if (writer.getConfig().getOpenMode() == IndexWriterConfig.OpenMode.CREATE) {
@@ -119,11 +120,13 @@ public class JoeIndex {
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
 			IndexWriter writer = new IndexWriter(dir, iwc);
 			
-			writer.deleteDocuments(new Term("path", "search/c/nginx.txt"));
-//			writer.deleteAll();//删除所有索引
+			//此时删除的文档并不会被完全删除，而是存储在一个回收站中的，可以恢复
+			writer.deleteDocuments(new Term("title", "nginx.txt"));
+//			writer.deleteAll();//删除所有索引，永久删除
 			
 			writer.commit();
 			writer.close();
+			this.getAllIndex(indexPath);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -131,6 +134,20 @@ public class JoeIndex {
 	
 	public void deleteAllIndex() {
 		
+	}
+	
+	public void mergerIndex(String indexPath) {
+		try {
+			Directory dir = FSDirectory.open(new File(indexPath));
+			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
+			IndexWriter writer = new IndexWriter(dir, iwc);
+			
+			writer.forceMergeDeletes();
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -144,7 +161,7 @@ public class JoeIndex {
 			Document doc = null;
 			for(int i = 0; i < reader.maxDoc(); i++) {
 				doc = searcher.doc(i);
-				System.out.println(doc.get("path"));
+				System.out.println(doc.get("title"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
