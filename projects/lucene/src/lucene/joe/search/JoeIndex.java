@@ -15,7 +15,6 @@ import org.apache.lucene.document.Field;
 import org.apache.lucene.document.LongField;
 import org.apache.lucene.document.StringField;
 import org.apache.lucene.document.TextField;
-import org.apache.lucene.document.Field.Index;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
@@ -29,6 +28,32 @@ import org.apache.lucene.util.Version;
 
 public class JoeIndex {
 	
+	private String indexPath;
+	private String docPath;
+	
+	public String getIndexPath() {
+		return indexPath;
+	}
+
+	public void setIndexPath(String indexPath) {
+		this.indexPath = indexPath;
+	}
+
+	public String getDocPath() {
+		return docPath;
+	}
+
+	public void setDocPath(String docPath) {
+		this.docPath = docPath;
+	}
+	
+	public JoeIndex() {}
+	
+	public JoeIndex(String indexPath, String docPath) {
+		this.indexPath = indexPath;
+		this.docPath = docPath;
+	}
+
 	private void indexDocs(IndexWriter writer, File file) throws IOException {
 		if (file.canRead())
 			if (file.isDirectory()) {
@@ -100,8 +125,8 @@ public class JoeIndex {
 	 * 生成索引
 	 * @param indexPath
 	 */
-	public void generateIndex(String docsPath, String indexPath) {
-		this.operateIndex(docsPath, indexPath, OpenMode.CREATE);
+	public void generateIndex() {
+		this.operateIndex(docPath, indexPath, OpenMode.CREATE);
 	}
 	
 	/**
@@ -109,8 +134,8 @@ public class JoeIndex {
 	 * @param docsPath
 	 * @param indexPath
 	 */
-	public void updateIndex(String docsPath, String indexPath) {
-		this.operateIndex(docsPath, indexPath, OpenMode.CREATE_OR_APPEND);
+	public void updateIndex() {
+		this.operateIndex(docPath, indexPath, OpenMode.CREATE_OR_APPEND);
 	}
 	
 	public void deleteIndex(String indexPath) {
@@ -124,7 +149,10 @@ public class JoeIndex {
 			writer.deleteDocuments(new Term("title", "nginx.txt"));
 //			writer.deleteAll();//删除所有索引，永久删除
 			
+			System.out.println(writer.hasUncommittedChanges());
 			writer.commit();
+			System.out.println(writer.hasUncommittedChanges());
+			
 			writer.close();
 			this.getAllIndex(indexPath);
 		} catch (Exception e) {

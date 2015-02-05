@@ -9,7 +9,7 @@ public class Client {
 //		index.generateIndex("search", "index");
 //		index.getAllIndex("index");
 		
-//		index.deleteIndex("index");
+		index.deleteIndex("index");
 //		index.mergerIndex("index");
 	}
 }
