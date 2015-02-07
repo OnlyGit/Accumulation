@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
+import org.ansj.lucene4.AnsjAnalysis;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
@@ -82,7 +83,8 @@ public class JoeIndex {
 			}
 			
 			Directory dir = FSDirectory.open(new File(indexPath));
-			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
+//			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
+			Analyzer analyzer = new AnsjAnalysis();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
 			iwc.setOpenMode(mode);
 			IndexWriter writer = new IndexWriter(dir, iwc);
@@ -129,8 +131,20 @@ public class JoeIndex {
 		}
 	}
 	
-	public void deleteAllIndex() {
-		
+	public void deleteAllIndex(String indexPath) {
+		try {
+			Directory dir = FSDirectory.open(new File(indexPath));
+			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
+			IndexWriter writer = new IndexWriter(dir, iwc);
+			
+			writer.deleteAll();//删除所有索引
+			
+			writer.commit();
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
