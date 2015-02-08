@@ -54,7 +54,7 @@ public class HttpConnectionManager {
 	private static void initManager() {
 		
 		conMgr = new PoolingClientConnectionManager();
-		conMgr.setMaxTotal(200);
+		conMgr.setMaxTotal(MAX_TOTAL_CONNECTIONS);
 		conMgr.setDefaultMaxPerRoute(conMgr.getMaxTotal());
 		
 		params = new BasicHttpParams(); 
