@@ -8,6 +8,8 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
+import org.wltea.analyzer.core.IKSegmenter;
+import org.wltea.analyzer.core.Lexeme;
 import org.wltea.analyzer.lucene.IKAnalyzer;
 
 public class IKAnalyzerDemo {
@@ -49,6 +51,24 @@ public class IKAnalyzerDemo {
 					e.printStackTrace();
 				}
 			}
+		}
+		
+		try {
+			ikSeg();
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void ikSeg() throws Throwable {
+		String content = "请确定2月7日到京参加答疑会及讲座的尽快办理手续、自己预定会场附近酒店";
+		IKSegmenter ikSeg = new IKSegmenter(new StringReader(content),true);
+
+		Lexeme l = null;
+		while ((l = ikSeg.next()) != null) {
+			String word = l.getLexemeText();
+			int wordType = l.getLexemeType();
+			System.out.println(wordType + "->" + word);
 		}
 	}
 }

@@ -83,8 +83,8 @@ public class JoeIndex {
 			}
 			
 			Directory dir = FSDirectory.open(new File(indexPath));
-//			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
-			Analyzer analyzer = new AnsjAnalysis();
+			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
+//			Analyzer analyzer = new AnsjAnalysis();
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
 			iwc.setOpenMode(mode);
 			IndexWriter writer = new IndexWriter(dir, iwc);
@@ -115,32 +115,28 @@ public class JoeIndex {
 	}
 	
 	public void deleteIndex(String indexPath) {
-		try {
-			Directory dir = FSDirectory.open(new File(indexPath));
-			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
-			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
-			IndexWriter writer = new IndexWriter(dir, iwc);
-			
-			writer.deleteDocuments(new Term("path", "search/c/nginx.txt"));
-//			writer.deleteAll();//删除所有索引
-			
-			writer.commit();
-			writer.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		this.deleteIndexs(indexPath, false);
 	}
 	
 	public void deleteAllIndex(String indexPath) {
+		this.deleteIndexs(indexPath, true);
+	}
+	
+	public void deleteIndexs(String indexPath, boolean indexAll) {
 		try {
 			Directory dir = FSDirectory.open(new File(indexPath));
 			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
 			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
 			IndexWriter writer = new IndexWriter(dir, iwc);
 			
-			writer.deleteAll();//删除所有索引
-			
+			if(indexAll) {
+				writer.deleteAll();//删除所有索引
+			} else {
+				writer.deleteDocuments(new Term("path", "search/c/nginx.txt"));
+			}
 			writer.commit();
+			
+			
 			writer.close();
 		} catch (Exception e) {
 			e.printStackTrace();
