@@ -29,6 +29,32 @@ import org.apache.lucene.util.Version;
 
 public class JoeIndex {
 	
+	private String indexPath;
+	private String docPath;
+	
+	public String getIndexPath() {
+		return indexPath;
+	}
+
+	public void setIndexPath(String indexPath) {
+		this.indexPath = indexPath;
+	}
+
+	public String getDocPath() {
+		return docPath;
+	}
+
+	public void setDocPath(String docPath) {
+		this.docPath = docPath;
+	}
+	
+	public JoeIndex() {}
+	
+	public JoeIndex(String indexPath, String docPath) {
+		this.indexPath = indexPath;
+		this.docPath = docPath;
+	}
+
 	private void indexDocs(IndexWriter writer, File file) throws IOException {
 		if (file.canRead())
 			if (file.isDirectory()) {
@@ -52,7 +78,7 @@ public class JoeIndex {
 					doc.add(pathField);
 
 					doc.add(new LongField("modified", file.lastModified(),Field.Store.NO));
-
+					
 					doc.add(new TextField("contents", new BufferedReader(new InputStreamReader(fis, StandardCharsets.UTF_8))));
 
 					if (writer.getConfig().getOpenMode() == IndexWriterConfig.OpenMode.CREATE) {
@@ -101,8 +127,8 @@ public class JoeIndex {
 	 * 生成索引
 	 * @param indexPath
 	 */
-	public void generateIndex(String docsPath, String indexPath) {
-		this.operateIndex(docsPath, indexPath, OpenMode.CREATE);
+	public void generateIndex() {
+		this.operateIndex(docPath, indexPath, OpenMode.CREATE);
 	}
 	
 	/**
@@ -110,12 +136,30 @@ public class JoeIndex {
 	 * @param docsPath
 	 * @param indexPath
 	 */
-	public void updateIndex(String docsPath, String indexPath) {
-		this.operateIndex(docsPath, indexPath, OpenMode.CREATE_OR_APPEND);
+	public void updateIndex() {
+		this.operateIndex(docPath, indexPath, OpenMode.CREATE_OR_APPEND);
 	}
 	
 	public void deleteIndex(String indexPath) {
-		this.deleteIndexs(indexPath, false);
+		try {
+			Directory dir = FSDirectory.open(new File(indexPath));
+			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
+			IndexWriter writer = new IndexWriter(dir, iwc);
+			
+			//此时删除的文档并不会被完全删除，而是存储在一个回收站中的，可以恢复
+			writer.deleteDocuments(new Term("title", "nginx.txt"));
+//			writer.deleteAll();//删除所有索引，永久删除
+			
+			System.out.println(writer.hasUncommittedChanges());
+			writer.commit();
+			System.out.println(writer.hasUncommittedChanges());
+			
+			writer.close();
+			this.getAllIndex(indexPath);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void deleteAllIndex(String indexPath) {
@@ -143,6 +187,20 @@ public class JoeIndex {
 		}
 	}
 	
+	public void mergerIndex(String indexPath) {
+		try {
+			Directory dir = FSDirectory.open(new File(indexPath));
+			Analyzer analyzer = new StandardAnalyzer(Version.LUCENE_4_10_3);
+			IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_4_10_3, analyzer);
+			IndexWriter writer = new IndexWriter(dir, iwc);
+			
+			writer.forceMergeDeletes();
+			writer.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * 查看所有索引
 	 * @param index
@@ -154,7 +212,7 @@ public class JoeIndex {
 			Document doc = null;
 			for(int i = 0; i < reader.maxDoc(); i++) {
 				doc = searcher.doc(i);
-				System.out.println(doc.get("path"));
+				System.out.println(doc.get("title"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

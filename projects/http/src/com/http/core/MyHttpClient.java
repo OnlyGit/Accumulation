@@ -26,9 +26,19 @@ import com.http.bean.HttpParamter;
  * @author qjf
  */
 public class MyHttpClient {
+	
+	private StringBuffer cookies = new StringBuffer();
 
 	DefaultHttpClient httpClient = null;
-	
+
+	public StringBuffer getCookies() {
+		return cookies;
+	}
+
+	public void setCookies(StringBuffer cookies) {
+		this.cookies = cookies;
+	}
+
 	public MyHttpClient() {
 		this.init(false);
 	}
@@ -88,7 +98,7 @@ public class MyHttpClient {
 		try {
 			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
 			method.setEntity(entity);
-			this.httpRequest(method);
+			result = this.httpRequest(method);
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -96,6 +106,58 @@ public class MyHttpClient {
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * get请求 带cookie
+	 * @param url
+	 * @param params
+	 * @param cookie
+	 * @return
+	 */
+	public String doGet(String url, HttpParamter[] params, String cookie) {
+		String result = "";
+		List<NameValuePair> formparams = this.getParams(params);
+		try {
+			if(formparams.size() > 0) {
+				url += "?" + EntityUtils.toString(new UrlEncodedFormEntity(formparams, "UTF-8"));
+			}
+			HttpGet method = new HttpGet(url);
+			method.setHeader("Cookie", cookie);
+			result = this.httpRequest(method);
+		} catch (ParseException | IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	/**
+	 * post请求带cookie
+	 * @param url
+	 * @param params
+	 * @param cookie
+	 * @return
+	 */
+	public String doPost(String url, HttpParamter[] params, String cookie) {
+		String result = "";
+		HttpPost method = new HttpPost(url);
+		
+		method.addHeader("Cookie", cookie);
+		
+		List<NameValuePair> formparams = this.getParams(params);
+		try {
+			UrlEncodedFormEntity entity = new UrlEncodedFormEntity(formparams, "UTF-8");
+			method.setEntity(entity);
+			result = this.httpRequest(method);
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
 	
 	/**
 	 * 执行http请求
@@ -115,7 +177,7 @@ public class MyHttpClient {
 		System.out.println("状态码为："+statusCode);
 
 		for(Header heade : setCookie) {
-			System.out.println(heade.getValue());
+			cookies.append(heade.getValue());
 		}
 		
 		
